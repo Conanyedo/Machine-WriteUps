@@ -1,4 +1,4 @@
-<p align="center"><img src="light-14.jpg" alt="https://github.com/AkaSec-1337-CyberSecurity-Club/Introduction/raw/main/light-14.jpg"/><br></p>
+<p align="center"><img src="https://github.com/AkaSec-1337-CyberSecurity-Club/Introduction/raw/main/light-14.jpg" alt="https://github.com/AkaSec-1337-CyberSecurity-Club/Introduction/raw/main/light-14.jpg"/><br></p>
 
 # Introduction
 
