@@ -61,9 +61,21 @@ After getting the reverse shell I started checking the current directory, which 
 I found in this directory 2 suspicious files, `finally.sh` with root as owner and `write.sh` with current user as owner which is `www-data`.<br>
 After printing their content I found that `finally.sh` execute `write.sh` file, where `write.sh` file create `/tmp/gateway` file using `touch` command.<br>
 That is all I could get for now.
-<p align="center"><img src="screenShots/ReverseShell.png" alt="Reverse Shell"/></p><br>
+<p align="center"><img src="screenShots/ReverseShell.png" alt="Reverse Shell"/></p>
 
 ### LinPEAS
 
+For more information about the system we can use LinPEAS tool, this tool can find possible CVEs and vulnerabilities that we can exploit.<br>
+<p align="center"><img src="screenShots/LinPEAS.png" alt="LinPEAS"/></p>
+<p align="center"><img src="screenShots/Information.png" alt="LinPEAS"/></p>
+
+After scrolling more and reading through the output, I found that the system is vulnerable to `CVE-2021-4043` (I won't exploit it for now).<br>
+Reading more I found a cronjob that runs every 5 minutes, the cronjob was highlighted by the `LinPEAS tool`.<br>
+The cronjob runs the `finally.sh` script that we found in `/var/www/html` as root, so whatever is written in `write.sh` will be run as root every 5 min.<br>
+<p align="center"><img src="screenShots/VulnerabilityFound.png" alt="LinPEAS"/></p>
+The way to privilege escalating is to set the current user `www-data` in the sudoers list in `/etc/sudoers` which can be updated only by the root.<br>
+I appended to `write.sh` script some commands to check sudoers file, then added `echo "www-data ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers` to `write.sh` script.<br>
+This will add the current user `www-data` to sudoers so he can run any command without password, Thus after 5 min I ran `sudo bash` as a sudoer and got bash with root privileges. 
+<p align="center"><img src="screenShots/PrivilegeEscalating.png" alt="LinPEAS"/></p>
 
 
