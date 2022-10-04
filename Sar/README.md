@@ -23,10 +23,13 @@ $> nmap FLAGS IPADDRESS
 -A flag for aggressive scanning
 -sV flag detect running services and their version
 ```
-<p align="center"><img src="screenShots/Dirb.png" alt="fuzzing for more paths"/></p><br>
+
+<p align="center"><img src="screenShots/Nmap.png" alt="Scan IP address with nmap"/></p><br>
 The output shows that we have port 80 open, so we can access the ip via browser, The default page shows apache info page.
 The next step is searching for more directories and files, to do that we can use **dirb** tool
+
 ```bash
 $> dirb http://IPADDRESS/ /path/to/wordlist
 ```
-<p align="center"><img src="screenShots/Nmap.png" alt="Scan IP address with nmap"/></p><br>
+
+<p align="center"><img src="screenShots/Dirb.png" alt="fuzzing for more paths"/></p><br>
