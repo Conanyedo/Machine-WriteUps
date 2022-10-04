@@ -65,7 +65,7 @@ That is all I could get for now.
 
 ### LinPEAS
 
-For more information about the system we can use `LinPEAS` tool, this tool can find possible CVEs and vulnerabilities that we can exploit.
+For more information about the system we can use <a href="https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS">`LinPEAS`</a> tool, this tool can find possible CVEs and vulnerabilities that we can exploit.
 
 <p align="center"><img src="screenShots/LinPEAS.png" alt="LinPEAS"/></p>
 <p align="center"><img src="screenShots/Information.png" alt="LinPEAS"/></p>
@@ -81,4 +81,8 @@ I appended to `write.sh` script some commands to check sudoers file, then added 
 This will add the current user `www-data` to sudoers so he can run any command without password, Thus after 5 min I ran `sudo bash` as a sudoer and got bash with root privileges. 
 <p align="center"><img src="screenShots/PrivilegeEscalating.png" alt="LinPEAS"/></p>
 
+## Resources
 
+Here are some resources I learned several concepts from when exploiting this machine.<br>
+- <a href="https://www.linuxfoundation.org/blog/blog/classic-sysadmin-configuring-the-linux-sudoers-file">About sudoers file</a>
+- <a href="https://vk9-sec.com/exploiting-the-cron-jobs-misconfigurations-privilege-escalation/">Privilege escalating with Cron jobs</a>
