@@ -44,3 +44,7 @@ The output of **dirb** tool shows 3 valid paths, `index.html` which is the defau
 I put that text as path in URL and I got the following page
 
 <p align="center"><img src="screenShots/sar2HTML.png" alt="sar2HTML page"/></p><br>
+
+After reading the content I decided to look up sar2Html in google, and I found that it is a service that has a Remote Code Execution vulnerability, I exploited it as described in <a href="https://www.exploit-db.com/exploits/47204">exploit-db</a>, `IPADDRESS/sar2HTML/index.php?plot=;<command>` this will execute the command and show the output of it in select host droplist at the left of the page.
+
+<p align="center"><img src="screenShots/RunTheExploit.png" alt="sar2HTML page"/></p><br>
