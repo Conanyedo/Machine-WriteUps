@@ -9,17 +9,22 @@ This box is on the <a href="https://docs.google.com/spreadsheets/d/1dwSMIAPIam0P
 ## Setup Machine
 
 First of all, I setup <a href="https://www.vulnhub.com/entry/sar-1,425/">sar machine</a> locally in a virtualMachine with the name **sar** then started it.
-After starting the machine, I got its IP address using **VBoxManage** command<br>
-`VBoxManage guestproperty enumerate sar | grep IP`<br>
-<p align="center"><img src="screenShots/SetupMachine.png" alt="Setting up the machine"/><br></p>
+After starting the machine, I got its IP address using **VBoxManage** command
+```bash
+$> VBoxManage guestproperty enumerate sar | grep IP
+```
 
 ## Enumeration
 
-The first step to penatrate a machine is gather information about it. After getting its IP address we can scan its to get open ports and service using **nmap** command<br>
-`nmap FLAGS IPADDRESS`<br>
-> -A flag for aggressive scanning<br>
-> -sV flag detect running services and their version<br>
+The first step to penatrate a machine is gather information about it. After getting its IP address we can scan its to get open ports and service using **nmap** command
+```bash
+$> nmap FLAGS IPADDRESS
+-A flag for aggressive scanning
+-sV flag detect running services and their version
+```
 The output shows that we have port 80 open, so we can access the ip via browser, The default page shows apache info page.
 The next step is searching for more directories and files, to do that we can use **dirb** tool<br>
-`dirb http://IPADDRESS/ /path/to/wordlist`<br>
+```bash
+$> dirb http://IPADDRESS/ /path/to/wordlist
+```
 <p align="center"><img src="screenShots/Nmap.png" alt="Scan IP address with nmap"/><img src="screenShots/Dirb.png" alt="fuzzing for more paths"/><br></p>
