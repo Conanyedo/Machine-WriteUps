@@ -65,14 +65,17 @@ That is all I could get for now.
 
 ### LinPEAS
 
-For more information about the system we can use LinPEAS tool, this tool can find possible CVEs and vulnerabilities that we can exploit.<br>
+For more information about the system we can use `LinPEAS` tool, this tool can find possible CVEs and vulnerabilities that we can exploit.
+
 <p align="center"><img src="screenShots/LinPEAS.png" alt="LinPEAS"/></p>
 <p align="center"><img src="screenShots/Information.png" alt="LinPEAS"/></p>
 
 After scrolling more and reading through the output, I found that the system is vulnerable to `CVE-2021-4043` (I won't exploit it for now).<br>
 Reading more I found a cronjob that runs every 5 minutes, the cronjob was highlighted by the `LinPEAS tool`.<br>
-The cronjob runs the `finally.sh` script that we found in `/var/www/html` as root, so whatever is written in `write.sh` will be run as root every 5 min.<br>
+The cronjob runs the `finally.sh` script that we found in `/var/www/html` as root, so whatever is written in `write.sh` will be run as root every 5 min.
+
 <p align="center"><img src="screenShots/VulnerabilityFound.png" alt="LinPEAS"/></p>
+
 The way to privilege escalating is to set the current user `www-data` in the sudoers list in `/etc/sudoers` which can be updated only by the root.<br>
 I appended to `write.sh` script some commands to check sudoers file, then added `echo "www-data ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers` to `write.sh` script.<br>
 This will add the current user `www-data` to sudoers so he can run any command without password, Thus after 5 min I ran `sudo bash` as a sudoer and got bash with root privileges. 
