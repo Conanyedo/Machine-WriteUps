@@ -39,3 +39,8 @@ $> dirb http://IPADDRESS/ /path/to/wordlist
 ```
 
 <p align="center"><img src="screenShots/Dirb.png" alt="fuzzing for more paths"/></p><br>
+
+The output of **dirb** tool shows 3 valid paths, > index.html which is the default apache page, > phpinfo.php shows php info and finally > robots.txt that has > sar2HTML text.
+I put that text as path in URL and I got the following page
+
+<p align="center"><img src="screenShots/sar2HTML.png" alt="sar2HTML page"/></p><br>
