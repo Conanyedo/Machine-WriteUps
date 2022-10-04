@@ -14,6 +14,7 @@ After starting the machine, I got its IP address using **VBoxManage** command
 $> VBoxManage guestproperty enumerate sar | grep IP
 ```
 <p align="center"><img src="screenShots/GetMachineIP.png" alt="Machine IP"/></p><br>
+
 ## Enumeration
 
 The first step to penatrate a machine is gather information about it. After getting its IP address we can scan its to get open ports and service using **nmap** command
@@ -24,7 +25,7 @@ $> nmap FLAGS IPADDRESS
 ```
 <p align="center"><img src="screenShots/Dirb.png" alt="fuzzing for more paths"/></p><br>
 The output shows that we have port 80 open, so we can access the ip via browser, The default page shows apache info page.
-The next step is searching for more directories and files, to do that we can use **dirb** tool<br>
+The next step is searching for more directories and files, to do that we can use **dirb** tool
 ```bash
 $> dirb http://IPADDRESS/ /path/to/wordlist
 ```
